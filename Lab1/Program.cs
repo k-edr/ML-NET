@@ -9,12 +9,34 @@
  * В якості набору даних можна використати https://www.kaggle.com/datasets/cerolacia/black-friday-sales-prediction
  * або використати власний набір даних.
 */
+using Lab1.ML;
 using Lab1.ML.Models;
 
 var str = typeof(PurchaseModel).GetProperties().Select(prop => prop.Name).ToArray();
 
 foreach (var item in str)
 {
-    Console.WriteLine(item);
+    //Console.WriteLine(item);
 }
 
+string modelpath = "MLModels\\PurchasePrediction.zip";
+
+var trainModels = PurchaseModelLoader.LoadFromFile("Data/train.csv", ',').ToList();
+
+new Trainer().Train(trainModels, modelpath);
+
+var predictModels = PurchaseModelLoader.LoadFromFile("Data/test.csv", ',').ToList();
+
+var predictions = new Predictor().Predict(predictModels, modelpath);
+
+using (StreamWriter sw = new StreamWriter("FilledSubmission.csv"))
+{
+    sw.WriteLine("Purchase,User_ID,Product_ID");
+
+    for (int i = 0; i < predictions.Count; i++)
+    {
+        sw.WriteLine($"{predictions.ElementAt(i):#},{predictModels.ElementAt(i).User_ID},{predictModels.ElementAt(i).Product_ID}");
+    }       
+
+    Console.WriteLine("Finish");
+}

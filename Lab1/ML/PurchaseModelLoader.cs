@@ -24,7 +24,7 @@ namespace Lab1.ML
                 {
                     var data = line.Split(separator);
 
-                    result.Add(new()
+                    var model = new PurchaseModel()
                     {
                         User_ID = float.Parse(data[0]),
                         Product_ID = data[1],
@@ -32,14 +32,23 @@ namespace Lab1.ML
                         Age = data[3],
                         Occupation = float.Parse(data[4]),
                         City_Category = data[5],
-                        Stay_In_Current_City_Years = float.Parse(data[6]),
+                        Stay_In_Current_City_Years = data[6],
                         Marital_Status = float.Parse(data[7]),
                         Product_Category_1 = data[8] == "" ? 0 : float.Parse(data[8]),
                         Product_Category_2 = data[9] == "" ? 0 : float.Parse(data[9]),
-                        Product_Category_3 = data[10] == "" ? 0 : float.Parse(data[10]),
-                        Purchase = data[11] == "" ? 0 : float.Parse(data[11])
-                    });
+                        Product_Category_3 = data[10] == "" ? 0 : float.Parse(data[10])
+                    };
+                    
+                    if(data.Length == 12)
+                    {
+                        model.Purchase = data[11] == "" ? 0 : float.Parse(data[11]);
+                    }
+                    else
+                    {
+                        model.Purchase = 0f;
+                    }
 
+                    result.Add(model);
                 }
 
                 return result;

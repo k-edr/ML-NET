@@ -15,18 +15,19 @@ namespace Lab1.ML
         {
             var trainingDataView = MlContext.Data.LoadFromEnumerable(data);
 
-            var dataSplit = MlContext.Data.TrainTestSplit(trainingDataView, testFraction: 0.2);
+            var dataSplit = MlContext.Data.TrainTestSplit(trainingDataView, testFraction: 0.1f);
 
             var dataProcessPipeline = MlContext.Transforms.CopyColumns("Label", nameof(PurchaseModel.Purchase))
-                .Append(MlContext.Transforms.Categorical.OneHotEncoding("Product_ID",nameof(PurchaseModel.Product_ID)))
+                .Append(MlContext.Transforms.Categorical.OneHotEncoding("Product_ID", nameof(PurchaseModel.Product_ID)))
                 .Append(MlContext.Transforms.Categorical.OneHotEncoding("Gender", nameof(PurchaseModel.Gender)))
                 .Append(MlContext.Transforms.Categorical.OneHotEncoding("Age", nameof(PurchaseModel.Age)))
                 .Append(MlContext.Transforms.Categorical.OneHotEncoding("City_Category", nameof(PurchaseModel.City_Category)))
+                .Append(MlContext.Transforms.Categorical.OneHotEncoding("Stay_In_Current_City_Years", nameof(PurchaseModel.Stay_In_Current_City_Years)))
                 .Append(MlContext.Transforms.Concatenate("Features",
-                    typeof(PurchaseModel).GetProperties().Select(prop => prop.Name).ToArray()));
+                    typeof(PurchaseModel).GetProperties().Select(prop => prop.Name).Where(name => name != nameof(PurchaseModel.Purchase)).ToArray()));
 
 
-            var trainer = MlContext.Regression.Trainers.Sdca(labelColumnName: "Label", featureColumnName: "Features");
+            var trainer = MlContext.Regression.Trainers.FastTree(labelColumnName: "Label", featureColumnName: "Features");
 
             var trainingPipeline = dataProcessPipeline.Append(trainer);
 
@@ -40,7 +41,7 @@ namespace Lab1.ML
             Console.WriteLine($"Loss Function: {modelMetrics.LossFunction:0.##}{Environment.NewLine}" +
                               $"Mean Absolute Error: {modelMetrics.MeanAbsoluteError:#.##}{Environment.NewLine}" +
                               $"Mean Squared Error: {modelMetrics.MeanSquaredError:#.##}{Environment.NewLine}" +
-                              $"RSquared: {modelMetrics.RSquared:0.##}{Environment.NewLine}" +
+                              $"RSquared: {modelMetrics.RSquared:0.0000000}{Environment.NewLine}" +
                               $"Root Mean Squared Error: {modelMetrics.RootMeanSquaredError:#.##}");
         }
     }

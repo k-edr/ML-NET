@@ -10,17 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="2.0.1" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="2.0.1" />
-    <PackageReference Include="PicNet.XGBoost" Version="0.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\sample_submission_V9Inaty.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\test.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Data\train.csv">
+    <None Update="Data\covid-liver.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -8,19 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="Microsoft.ML" Version="2.0.1" />
-    <PackageReference Include="Microsoft.ML.FastTree" Version="2.0.1" />
-    <PackageReference Include="PicNet.XGBoost" Version="0.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\sample_submission_V9Inaty.csv">
+    <None Update="Data\ClearedData.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\test.csv">
+    <None Update="Data\new_year_resolutions_dataset.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Data\train.csv">
+    <None Update="Data\SelectedData.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -9,17 +9,28 @@ namespace Lab1.ML.Models
 {
     public class PurchaseModel
     {
-        public float User_ID { get; set; }
-        public string Product_ID { get; set; }
-        public string Gender { get; set; }
-        public string Age { get; set; }//hot cat
-        public float Occupation { get; set; }
-        public string City_Category { get; set; }//hot cat
-        public float Stay_In_Current_City_Years { get; set; }//hot
-        public float Marital_Status { get; set; }
-        public float Product_Category_1 { get; set; }//def()
-        public float Product_Category_2 { get; set; }//def()
-        public float Product_Category_3 { get; set; }//def()
+        public required float User_ID { get; set; }
+
+        public required string Product_ID { get; set; }
+        
+        public required string Gender { get; set; }
+
+        public required string Age { get; set; }
+
+        public required float Occupation { get; set; }
+
+        public required string City_Category { get; set; }
+
+        public required string Stay_In_Current_City_Years { get; set; }
+
+        public required float Marital_Status { get; set; }
+
+        public required float Product_Category_1 { get; set; }
+
+        public required float Product_Category_2 { get; set; }
+
+        public required float Product_Category_3 { get; set; }
+
         public float Purchase { get; set; }
 
         public override string? ToString()
